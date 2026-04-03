@@ -1,0 +1,13 @@
+django
+pymysql
+opencv-python
+numpy
+matplotlib
+scikit-learn
+keras
+tensorflow
+imutils
+scipy
+python-dotenv
+pandas
+pickle-mixin
