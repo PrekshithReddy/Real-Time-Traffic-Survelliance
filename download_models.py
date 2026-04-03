@@ -4,7 +4,7 @@ import zipfile
 import io
 import shutil
 
-# The link to your combined models ZIP file (Make sure it's the updated one!)
+# The link to your combined models ZIP file
 ZIP_URL = "https://github.com/PrekshithReddy/Real-Time-Traffic-Survelliance/releases/download/v1.0.0-weights/models.zip"
 
 def download_and_extract():
@@ -24,19 +24,30 @@ def download_and_extract():
         with zipfile.ZipFile(io.BytesIO(response.content)) as z:
             z.extractall("tmp_models")
             
-        print("📁 Moving models to correct folders...")
+        print("📁 Organizing models to correct folders...")
         
-        # Move files from tmp_models/models/ to /models/
-        if not os.path.exists("models"):
-            os.makedirs("models")
-        for item in os.listdir("tmp_models/models"):
-            shutil.move(os.path.join("tmp_models/models", item), os.path.join("models", item))
-            
-        # Move files from tmp_models/Models/ to /Helmet/Models/
-        if not os.path.exists("Helmet/Models"):
-            os.makedirs("Helmet/Models")
-        for item in os.listdir("tmp_models/Models"):
-            shutil.move(os.path.join("tmp_models/Models", item), os.path.join("Helmet/Models", item))
+        # Helper to move files even if they're nested
+        def move_contents(src_folder, dest_folder):
+            if not os.path.exists(dest_folder):
+                os.makedirs(dest_folder)
+            if not os.path.exists(src_folder):
+                print(f"⚠️ Warning: Source {src_folder} not found in ZIP.")
+                return
+            for item in os.listdir(src_folder):
+                s = os.path.join(src_folder, item)
+                d = os.path.join(dest_folder, item)
+                if os.path.isdir(s):
+                    if os.path.exists(d): shutil.rmtree(d)
+                    shutil.copytree(s, d)
+                else:
+                    shutil.move(s, d)
+
+        # Now we match any possible zip structure:
+        # 1. Main Models: Look for 'models' folder or just files in the root
+        move_contents("tmp_models/models", "models")
+        
+        # 2. Helmet Models: Look for 'Models' folder
+        move_contents("tmp_models/Models", "Helmet/Models")
 
         # Cleanup
         shutil.rmtree("tmp_models")
