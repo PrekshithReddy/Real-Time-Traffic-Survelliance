@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Traffic Monitoring</title>
+    <link rel="stylesheet" href="{% static 'modern.css' %}">
+</head>
+<body class="fade-in">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">Traffic Monitoring</div>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'Aboutus' %}">About Us</a></li>
+                    <li><a href="{% url 'UserLogin' %}" class="btn-nav">Login</a></li>
+                    <li><a href="{% url 'Signup' %}" class="btn-nav">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 100px 0;">
+        <div class="card glass-card animate-up" style="max-width: 850px; margin: 0 auto; text-align: left; padding: 60px;">
+            <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary-color);">Our Vision</h2>
+            
+            {% if data %}
+            <div style="background: rgba(112, 111, 211, 0.08); padding: 20px; border-radius: 12px; margin-bottom: 40px; text-align: center; color: var(--primary-color); font-weight: 500; border: 1px solid rgba(112, 111, 211, 0.1);">
+                {{ data }}
+            </div>
+            {% endif %}
+
+            <div style="font-size: 1.15rem; color: var(--text-color); line-height: 1.9;">
+                <p style="margin-bottom: 30px;">
+                    Welcome to the <strong>Smart Traffic Surveillance and Detection</strong> platform. Our project is dedicated to revolutionizing urban mobility by applying advanced Artificial Intelligence directly to traffic management challenges.
+                </p>
+                <p style="margin-bottom: 30px;">
+                    By utilizing state-of-the-art Deep Learning models like YOLOv7, we provide automated, real-time detection of vehicles, helmet compliance, and traffic violations. Our goal is to create safer, smarter cities through reliable data-driven insights.
+                </p>
+                <div class="grid" style="margin-top: 48px;">
+                    <div style="text-align: center; padding: 24px; background: #fafafa; border-radius: 16px;">
+                        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🚀</span>
+                        <h4 style="margin-bottom: 8px;">Real-time</h4>
+                        <p style="font-size: 0.9rem; color: var(--light-text);">Instant Analysis</p>
+                    </div>
+                    <div style="text-align: center; padding: 24px; background: #fafafa; border-radius: 16px;">
+                        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🎯</span>
+                        <h4 style="margin-bottom: 8px;">Accuracy</h4>
+                        <p style="font-size: 0.9rem; color: var(--light-text);">YOLOv7 Powered</p>
+                    </div>
+                    <div style="text-align: center; padding: 24px; background: #fafafa; border-radius: 16px;">
+                        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">📊</span>
+                        <h4 style="margin-bottom: 8px;">Analytics</h4>
+                        <p style="font-size: 0.9rem; color: var(--light-text);">Smart Insights</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Traffic Monitoring System | Innovation in Urban Mobility</p>
+        </div>
+    </footer>
+
+</body>
+</html>

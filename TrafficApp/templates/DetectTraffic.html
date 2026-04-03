@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surveillance | Traffic Monitoring</title>
+    <link rel="stylesheet" href="{% static 'modern.css' %}">
+    <script>
+        function validate() {
+            var x = document.forms["f1"]["t1"].value;
+            if (x == null || x == "") {
+                window.alert("Please upload a traffic video file");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body class="fade-in">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">Traffic Monitoring</div>
+                <ul>
+                    <li><a href="{% url 'TrainYolo' %}">Dashboard</a></li>
+                    <li><a href="{% url 'TrainYolo' %}">Train Algorithm</a></li>
+                    <li><a href="{% url 'DetectTraffic' %}">Surveillance</a></li>
+                    <li><a href="{% url 'index' %}" class="btn-nav" style="background: #333; color: white !important;">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 60px 0 100px;">
+        <div style="margin-bottom: 48px; display: flex; justify-content: space-between; align-items: flex-end;" class="animate-up">
+            <div>
+                <h2 style="font-size: 2.4rem; font-weight: 700;">Live Surveillance</h2>
+                <p style="color: var(--light-text); font-size: 1.1rem;">Upload a traffic stream to initiate real-time YOLOv7 detection.</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; background: rgba(46, 204, 113, 0.1); padding: 10px 20px; border-radius: 50px; border: 1px solid rgba(46, 204, 113, 0.2);">
+                <div style="width: 10px; height: 10px; background: #2ecc71; border-radius: 50%; animation: pulse 2s infinite;"></div>
+                <span style="color: #27ae60; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px;">System Live</span>
+            </div>
+        </div>
+
+        <section class="card glass-card animate-up" style="max-width: 100%; margin-bottom: 60px; animation-delay: 0.1s;">
+            <h3 style="font-size: 1.8rem; margin-bottom: 12px;">Process Video Stream</h3>
+            <p class="card-subtitle">Upload your traffic footage below to execute deep learning based vehicle and helmet detection.</p>
+            
+            {% if data %}
+            <div style="background: rgba(46, 204, 113, 0.08); padding: 24px; border-radius: 12px; border-left: 6px solid var(--secondary-color); text-align: left; color: #1e3723; margin-bottom: 40px; font-size: 0.95rem; line-height: 1.6;">
+                {{ data|safe }}
+            </div>
+            {% endif %}
+
+            <form name="f1" method="post" action="{% url 'DetectTrafficAction' %}" enctype="multipart/form-data" onsubmit="return validate()">
+                {% csrf_token %}
+                <div style="border: 2px dashed #e0e0e0; padding: 60px 40px; border-radius: 16px; background: #fafafa; position: relative; transition: var(--transition);">
+                    <input type="file" name="t1" id="file-upload" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; opacity: 0; cursor: pointer;" onchange="document.getElementById('file-label').textContent = this.files[0].name; this.parentElement.style.borderColor = 'var(--primary-color)'">
+                    <div id="upload-ui" style="pointer-events: none;">
+                        <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;">📂</span>
+                        <h4 id="file-label" style="font-weight: 600; color: #333;">Click to select or drag video</h4>
+                        <p style="color: var(--light-text); font-size: 0.85rem; margin-top: 8px;">Supports MP4, AVI, and MOV formats</p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 48px;">
+                    <input type="submit" value="Execute Detection Session" class="btn-primary" style="width: 100%;">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Traffic Monitoring System</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Traffic Monitoring</title>
+    <link rel="stylesheet" href="{% static 'modern.css' %}?v=10">
+</head>
+<body class="fade-in">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">Traffic Monitoring</div>
+                <ul>
+                    <li><a href="{% url 'TrainYolo' %}">Dashboard</a></li>
+                    <li><a href="{% url 'TrainYolo' %}">Train Algorithm</a></li>
+                    <li><a href="{% url 'DetectTraffic' %}">Surveillance</a></li>
+                    <li><a href="{% url 'index' %}" class="btn-nav" style="background: #333; color: white !important;">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 60px 0 100px;">
+        <div style="margin-bottom: 48px; text-align: left;">
+            <h2 style="font-size: 2.4rem; font-weight: 700;">System Dashboard</h2>
+            <p style="color: var(--light-text); font-size: 1.1rem;">Welcome back. Access your traffic surveillance and model training modules below.</p>
+        </div>
+        
+        {% if data %}
+        <div id="results-display" class="animate-up">
+            <!-- Table stays here for standard view but we will hide it and show cards via JS -->
+            <div id="raw-data" style="display: none;">
+                {{ data|safe }}
+            </div>
+            
+            <div id="scorecard-grid" class="grid" style="margin-bottom: 60px;">
+                <!-- Dynamically populated by JS -->
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const rawDiv = document.getElementById('raw-data');
+                const scorecardGrid = document.getElementById('scorecard-grid');
+                const table = rawDiv.querySelector('table');
+                
+                if (table && scorecardGrid) {
+                    const rows = Array.from(table.getElementsByTagName('tr'));
+                    const headers = Array.from(rows[0].getElementsByTagName('th')).map(th => th.innerText);
+                    const dataRow = Array.from(rows[1].getElementsByTagName('td'));
+
+                    // Create Scorecards
+                    headers.forEach((header, index) => {
+                        if (index === 0) return; // Skip Algorithm Name for cards
+                        
+                        let val = dataRow[index].innerText;
+                        let numericVal = parseFloat(val);
+                        if (!isNaN(numericVal)) {
+                            val = numericVal.toFixed(2) + '%';
+                        }
+
+                        let cleanHeader = header.replace('FSCORE', 'F1 Score');
+
+                        const card = document.createElement('div');
+                        card.className = 'grid-item animate-up';
+                        card.style.animationDelay = (index * 0.1) + 's';
+                        card.style.padding = '32px';
+                        card.innerHTML = `
+                            <div style="font-size: 0.85rem; font-weight: 700; color: var(--light-text); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">${cleanHeader}</div>
+                            <div style="font-size: 2.4rem; font-weight: 800; color: var(--primary-color);">${val}</div>
+                        `;
+                        scorecardGrid.appendChild(card);
+                    });
+                }
+            });
+        </script>
+        {% endif %}
+
+        <div class="grid">
+            <a href="{% url 'DetectTraffic' %}" class="grid-item">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🎥</div>
+                <h3>Start Surveillance</h3>
+                <p>Execute real-time vehicle and safety detection on video streams.</p>
+                <div style="margin-top: 24px; color: var(--primary-color); font-weight: 600; font-size: 0.9rem;">Launch Module &rarr;</div>
+            </a>
+            
+            <a href="{% url 'TrainYolo' %}" class="grid-item">
+                <div style="font-size: 3rem; margin-bottom: 16px;">🧠</div>
+                <h3>Train Algorithm</h3>
+                <p>Initiate YOLOv7 neural network training session for optimized accuracy.</p>
+                <div style="margin-top: 24px; color: var(--primary-color); font-weight: 600; font-size: 0.9rem;">Configure Training &rarr;</div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Traffic Monitoring System</p>
+        </div>
+    </footer>
+
+</body>
+</html>

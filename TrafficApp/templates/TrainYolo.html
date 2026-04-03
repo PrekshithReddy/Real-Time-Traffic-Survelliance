@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Training | Traffic Monitoring</title>
+    <link rel="stylesheet" href="{% static 'modern.css' %}">
+    <script>
+        function validate() {
+            var x = document.forms["f1"]["username"].value;
+            var y = document.forms["f1"]["password"].value;
+            if (x == null || x == "") {
+                window.alert("Username must be entered");
+                document.f1.username.focus();
+                return false;
+            }
+            if (y == null || y == "") {
+                window.alert("Password must be entered");
+                document.f1.password.focus();
+                return false;
+            }
+            return true;
+        }
+    </script>
+</head>
+<body class="fade-in">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">Traffic Monitoring</div>
+                <ul>
+                    <li><a href="{% url 'TrainYolo' %}">Dashboard</a></li>
+                    <li><a href="{% url 'TrainYolo' %}">Train Algorithm</a></li>
+                    <li><a href="{% url 'DetectTraffic' %}">Surveillance</a></li>
+                    <li><a href="{% url 'index' %}" class="btn-nav" style="background: #333; color: white !important;">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="card-section">
+        <div class="card glass-card animate-up">
+            <h2>Model Training</h2>
+            <p class="card-subtitle">Authorize administrative credentials to initiate the YOLOv7 neural network training cycle.</p>
+            
+            {% if data %}
+            <div style="background: #fff5f5; color: #e53e3e; padding: 12px; border-radius: 8px; margin-bottom: 24px; font-weight: 500; font-size: 0.9rem;">{{ data }}</div>
+            {% endif %}
+
+            <form name="f1" method="post" action="{% url 'UserLoginAction' %}" onsubmit="return validate()">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Admin ID</label>
+                    <input type="text" name="username" class="form-control" placeholder="Admin username">
+                </div>
+                <div class="form-group">
+                    <label>Security Key</label>
+                    <input type="password" name="password" class="form-control" placeholder="Admin password">
+                </div>
+                <div style="margin-top: 40px;">
+                    <input type="submit" value="Initiate Training Cycle" class="btn-primary" style="width: 100%;">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Traffic Monitoring System</p>
+        </div>
+    </footer>
+
+</body>
+</html>

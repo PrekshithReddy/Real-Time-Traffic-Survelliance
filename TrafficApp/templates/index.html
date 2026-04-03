@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Monitoring | Smart Surveillance</title>
+    <link rel="stylesheet" href="{% static 'modern.css' %}?v=10">
+</head>
+<body class="fade-in">
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo-text">Traffic Monitoring</div>
+                <ul>
+                    <li><a href="{% url 'index' %}">Home</a></li>
+                    <li><a href="{% url 'Aboutus' %}">About Us</a></li>
+                    <li><a href="{% url 'UserLogin' %}" class="btn-nav">Login</a></li>
+                    <li><a href="{% url 'Signup' %}" class="btn-nav">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero animate-up" style="padding: 140px 0 100px; background: radial-gradient(circle at 70% 30%, rgba(112, 111, 211, 0.08) 0%, transparent 60%);">
+            <div class="container">
+                <h1 style="font-size: 4.2rem; line-height: 1.1; margin-bottom: 28px; letter-spacing: -2px;">Smarter Traffic, <br><span style="color: var(--primary-color);">Safer Cities.</span></h1>
+                <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 48px; color: var(--light-text); line-height: 1.8;">Advanced Real-time Surveillance and Detection powered by state-of-the-art YOLOv7 neural networks and intelligent computer vision.</p>
+                <div class="cta">
+                    <a href="{% url 'UserLogin' %}" class="btn-primary">Get Started Now</a>
+                    <a href="{% url 'Aboutus' %}" style="margin-left: 20px; color: var(--text-color); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--primary-light);">Learn More &rarr;</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" style="padding: 60px 0 120px;">
+            <div class="grid">
+                <div class="grid-item animate-up" style="animation-delay: 0.1s;">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">🛰️</div>
+                    <h3>Real-time Detection</h3>
+                    <p>Instant identification of vehicles, pedestrians, and safety violations with low latency.</p>
+                </div>
+                <div class="grid-item animate-up" style="animation-delay: 0.2s;">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">📊</div>
+                    <h3>Integrated Analytics</h3>
+                    <p>Comprehensive dashboard for traffic flow analysis and urban mobility planning.</p>
+                </div>
+                <div class="grid-item animate-up" style="animation-delay: 0.3s;">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">🛡️</div>
+                    <h3>Public Safety</h3>
+                    <p>Automated helmet detection and safety protocol monitoring for secure urban spaces.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Traffic Monitoring System. Intelligent Urban Infrastructure.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
