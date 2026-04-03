@@ -19,40 +19,37 @@ def download_and_extract():
         response = requests.get(ZIP_URL, stream=True)
         response.raise_for_status()
         
-        # Extract everything into a temporary folder first
-        print("📦 Extracting all models...")
+        # 1. Open the zip file in memory
         with zipfile.ZipFile(io.BytesIO(response.content)) as z:
-            z.extractall("tmp_models")
+            print("📦 Analyzing ZIP contents...")
             
-        print("📁 Organizing models to correct folders...")
-        
-        # Helper to move files even if they're nested
-        def move_contents(src_folder, dest_folder):
-            if not os.path.exists(dest_folder):
-                os.makedirs(dest_folder)
-            if not os.path.exists(src_folder):
-                print(f"⚠️ Warning: Source {src_folder} not found in ZIP.")
-                return
-            for item in os.listdir(src_folder):
-                s = os.path.join(src_folder, item)
-                d = os.path.join(dest_folder, item)
-                if os.path.isdir(s):
-                    if os.path.exists(d): shutil.rmtree(d)
-                    shutil.copytree(s, d)
+            # 2. Iterate through every file in the ZIP
+            for file_info in z.infolist():
+                filename = os.path.basename(file_info.filename)
+                if not filename: continue # Skip directories
+                
+                # 3. Rules for where each file goes
+                dest_path = None
+                
+                # Rule A: Helmet Detection models
+                if filename in ['yolov5-obj_2400.weights', 'yolov5-obj.cfg', 'obj.names', 'yolov5-scooter.cfg']:
+                    dest_path = os.path.join("Helmet", "Models", filename)
+                
+                # Rule B: Everything else goes to the main models folder
                 else:
-                    shutil.move(s, d)
+                    dest_path = os.path.join("models", filename)
 
-        # Now we match any possible zip structure:
-        # 1. Main Models: Look for 'models' folder or just files in the root
-        move_contents("tmp_models/models", "models")
-        
-        # 2. Helmet Models: Look for 'Models' folder
-        move_contents("tmp_models/Models", "Helmet/Models")
+                # 4. Extract and Move
+                if dest_path:
+                    # Create directory if it doesn't exist
+                    os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+                    
+                    # Extract the file
+                    with z.open(file_info) as source, open(dest_path, "wb") as target:
+                        shutil.copyfileobj(source, target)
+                        print(f"✔️ Extracted: {filename} -> {dest_path}")
 
-        # Cleanup
-        shutil.rmtree("tmp_models")
-        
-        print("✨ All models and helmet weights downloaded and extracted successfully!")
+        print("✨ All models and helmet weights are now in their correct locations!")
     except Exception as e:
         print(f"❌ Failed to download or extract models: {e}")
         print("Please ensure the ZIP_URL is correct and publicly accessible.")
