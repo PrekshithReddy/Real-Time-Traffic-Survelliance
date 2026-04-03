@@ -63,26 +63,6 @@ Run the SQL queries found in `DB.txt` on your MySQL server to initialize the tab
 
 ---
 
-## 🚀 Deployment (Render)
-
-This project is optimized for deployment on **Render**.
-
-1.  **Host Models**: Ensure your `models.zip` is uploaded to a **GitHub Release** and the link is correctly set in `download_models.py`.
-2.  **Environment Variables**: In the Render Dashboard, add your `.env` variables (**DB_HOST**, **DB_NAME**, **DB_USER**, **DB_PASSWORD**).
-3.  **Build Command**:
-    ```bash
-    pip install -r requirements.txt && python download_models.py
-    ```
-4.  **Start Command**:
-    ```bash
-    gunicorn TrafficProject.wsgi:application
-    ```
-
-> [!IMPORTANT]
-> **Memory Requirements**: Since YOLO and VGG models are large, this project requires at least **2GB of RAM**. It is recommended to use the **Render Starter Plan ($7/month)** instead of the Free tier to avoid Out-Of-Memory (OOM) crashes.
-
----
-
 ## 🏃 Running the Application Locally
 
 Start the Django server:
