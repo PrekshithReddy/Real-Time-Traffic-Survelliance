@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surveilla AI | Premium Traffic Intelligence</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Core Styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <span>SURVEILLA</span>
+            </div>
+
+            <nav>
+                <ul class="nav-links">
+                    <li class="nav-item active"><i class="fas fa-th-large"></i> Dashboard</li>
+                    <li class="nav-item"><i class="fas fa-video"></i> Live Cameras</li>
+                    <li class="nav-item"><i class="fas fa-history"></i> Logs</li>
+                    <li class="nav-item"><i class="fas fa-chart-line"></i> Analytics</li>
+                    <li class="nav-item"><i class="fas fa-cog"></i> Settings</li>
+                </ul>
+            </nav>
+
+            <div class="glass-card footer-card" style="margin-top: auto; padding: 1rem;">
+                <div style="font-size: 0.8rem; color: var(--text-secondary);">SYSTEM HEALTH</div>
+                <div style="font-size: 1.1rem; font-weight: 700; color: var(--accent-green);">98.4%</div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-content">
+            <header class="header">
+                <div>
+                    <h1>Intelligence Dashboard</h1>
+                    <p style="color: var(--text-secondary);">Real-time monitoring for Zone A-12 • Central District</p>
+                </div>
+                <div class="glass-card" style="padding: 0.8rem 1.5rem; display: flex; gap: 1.5rem; align-items: center;">
+                    <div style="text-align: right;">
+                        <div style="font-size: 0.75rem; color: var(--text-secondary);">CURRENT DATE</div>
+                        <div style="font-size: 0.95rem; font-weight: 600;" id="current-date">April 03, 2026</div>
+                    </div>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: #2a2b4e; display: grid; place-items: center;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <!-- Stats Section -->
+                <div class="glass-card stat-card">
+                    <span class="stat-label">Total Vehicles</span>
+                    <span class="stat-value" id="count-vehicles">1,428</span>
+                    <span class="stat-trend trend-up"><i class="fas fa-arrow-up"></i> 12.5% Today</span>
+                </div>
+
+                <div class="glass-card stat-card">
+                    <span class="stat-label">Violations Detected</span>
+                    <span class="stat-value" id="count-violations">42</span>
+                    <span class="stat-trend trend-up" style="color: var(--danger);"><i class="fas fa-exclamation-triangle"></i> +3 Since Last Hour</span>
+                </div>
+
+                <div class="glass-card stat-card">
+                    <span class="stat-label">Flow Efficiency</span>
+                    <span class="stat-value">84%</span>
+                    <span class="stat-trend trend-up"><i class="fas fa-check"></i> Stable Traffic</span>
+                </div>
+
+                <!-- Live Feed Section -->
+                <div class="glass-card live-feed" id="main-feed-card">
+                    <div class="feed-container" id="video-placeholder">
+                        <div class="feed-overlay">
+                            <div class="live-dot"></div>
+                            <span>Camera 04 • Live</span>
+                        </div>
+                        
+                        <!-- Simulated AI Boxes (Animated with JS) -->
+                        <div id="detection-layer">
+                            <div class="detection-box" style="width: 120px; height: 80px; top: 220px; left: 340px;">
+                                <div class="detection-label">CAR [88%]</div>
+                            </div>
+                            <div class="detection-box" style="width: 60px; height: 100px; top: 250px; left: 520px; border-color: var(--accent-purple);">
+                                <div class="detection-label" style="background: var(--accent-purple);">BIKE [92%]</div>
+                            </div>
+                        </div>
+                        
+                        <div style="position: absolute; bottom: 20px; right: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.5);">
+                            GRID COORDS: 40.7128° N, 74.0060° W
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Violations Monitor -->
+                <div class="glass-card violation-card">
+                    <h3 style="font-size: 1.1rem; font-weight: 600;">System Alerts</h3>
+                    <div class="v-list" id="violation-list">
+                        <div class="v-item">
+                            <div class="v-info">
+                                <h4>No Helmet Detection</h4>
+                                <p>Vehicle: BZ-902 • 14:02</p>
+                            </div>
+                            <span class="v-tag">VIOLATION</span>
+                        </div>
+                        <div class="v-item">
+                            <div class="v-info">
+                                <h4>Wrong Way</h4>
+                                <p>Vehicle: TX-441 • 13:58</p>
+                            </div>
+                            <span class="v-tag">CRITICAL</span>
+                        </div>
+                        <div class="v-item">
+                            <div class="v-info">
+                                <h4>Speeding (78km/h)</h4>
+                                <p>Vehicle: MN-102 • 13:45</p>
+                            </div>
+                            <span class="v-tag">WARNING</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Logs Section -->
+                <div class="glass-card" style="grid-column: span 3; padding: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.1rem; font-weight: 600;">Detection Flow Analytics</h3>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button class="nav-item" style="padding: 0.4rem 0.8rem; font-size: 0.75rem; background: var(--accent-purple); color: white;">24H View</button>
+                            <button class="nav-item" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">Export CSV</button>
+                        </div>
+                    </div>
+                    <div id="chart-placeholder" style="width: 100%; height: 150px; background: rgba(255,255,255,0.03); border-radius: 12px; display: grid; place-items: center; border: 1px dashed var(--glass-border);">
+                        <p style="color: var(--text-secondary); font-size: 0.85rem;">Simulating real-time data stream...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Logic for the "Live" feeling -->
+    <script src="script.js"></script>
+</body>
+</html>
