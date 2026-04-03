@@ -28,7 +28,7 @@ A high-performance web application designed for real-time traffic monitoring, ve
 
 Follow these steps to get your own instance running:
 
-### 1. Clone the Portfolio
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/PrekshithReddy/Real-Time-Traffic-Survelliance.git
 cd Real-Time-Traffic-Survelliance
@@ -40,7 +40,7 @@ Copy the example file to your own `.env` and enter your database credentials:
 # On Windows
 copy .env.example .env
 ```
-Now, open `.env` and fill in your **DB_NAME**, **DB_USER**, and **DB_PASSWORD**.
+Now, open `.env` and fill in your **DB_NAME**, **DB_USER**, and **DB_PASSWORD**. The application will automatically use these variables for database connections.
 
 ### 3. Model Weights (Crucial Step)
 Due to GitHub's file size limits, we do not store the AI model weights directly in the repository history.
@@ -50,32 +50,20 @@ Run the following script to automatically download and extract all required mode
 ```bash
 python download_models.py
 ```
-This script will fetch the `models.zip` from the GitHub Release and set up everything for you.
+This script will fetch the `models.zip` from your GitHub Release and set up everything for you.
 
----
+### 4. Install Dependencies
+Make sure you have Python 3 installed, then run:
+```bash
+pip install -r requirements.txt
+```
 
-## 🚀 Deployment (Render)
-
-This project is optimized for deployment on **Render**.
-
-1.  **Host Models**: Ensure your `models.zip` is uploaded to a **GitHub Release** and the link is correctly set in `download_models.py`.
-2.  **Environment Variables**: In the Render Dashboard, add your `.env` variables (**DB_HOST**, **DB_NAME**, **DB_USER**, **DB_PASSWORD**).
-3.  **Build Command**:
-    ```bash
-    pip install -r requirements.txt && python download_models.py
-    ```
-4.  **Start Command**:
-    ```bash
-    gunicorn TrafficProject.wsgi:application
-    ```
-
-> [!IMPORTANT]
-> **Memory Requirements**: Since YOLO and VGG models are large, this project requires at least **2GB of RAM**. It is recommended to use the **Render Starter Plan ($7/month)** instead of the Free tier to avoid Out-Of-Memory (OOM) crashes.
+### 5. Setup Database
+Run the SQL queries found in `DB.txt` on your MySQL server to initialize the tables.
 
 ---
 
 ## 🏃 Running the Application Locally
-...
 
 Start the Django server:
 ```bash
@@ -86,7 +74,7 @@ Visit `http://127.0.0.1:8000` in your browser to see the dashboard!
 ---
 
 ## 🛡️ Security Note
-This project utilizes environment-based security. Real credentials and local database secrets are permanently ignored via `.gitignore` to prevent data leakage.
+This project utilizes environment-based security. Real credentials and local database secrets are permanently ignored via `.gitignore` to prevent any data leakage.
 
 ## 🤝 Contributing
 Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/PrekshithReddy/Real-Time-Traffic-Survelliance/issues).
