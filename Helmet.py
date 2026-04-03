@@ -86,7 +86,7 @@ def postprocess(frame, outs, option):
             
     print(str(frame_count_out))
     if count_person == 0 and option == 1:
-        cv2.putText(frame, "Helmet Not detected", (10, 50), cv.FONT_HERSHEY_SIMPLEX, 0.75, (0,255,0), 2)
+        cv2.putText(frame, "Helmet Not detected", (10, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.75, (0,255,0), 2)
     return frame
 
 def getHelmet(frame):
