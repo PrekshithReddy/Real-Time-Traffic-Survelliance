@@ -11,3 +11,5 @@ scipy
 python-dotenv
 pandas
 pickle-mixin
+requests
+gunicorn

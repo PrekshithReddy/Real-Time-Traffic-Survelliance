@@ -48,8 +48,73 @@ node_modules/
 # Project specific
 output.mp4
 Videos/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Database config (if any)
+db.js
+config.js
+database.js
+database.py
+db.sqlite3
+
+# Logs
+*.log
+logs/
+
+# OS/IDEs
+.DS_Store
+.vscode/
+.idea/
+
+# Node (in case there's any frontend)
+node_modules/
+
+# Project specific
+output.mp4
+Videos/
 Helmet/
 TrafficApp/__pycache__/
 Traffic/__pycache__/
 SCREENS.docx
 backup_v1/
+
+# Large Model files
+models/
+*.weights
+*.hdf5
+*.npy
+
+# Environments
+.venv/
+.env
+db.sqlite3
+DB.txt
+SCREENS.docx
+output.mp4
+models.zip
